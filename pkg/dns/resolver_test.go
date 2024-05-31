@@ -36,7 +36,7 @@ func (m *MockPacketConn) SetReadDeadline(t time.Time) error {
 func (m *MockPacketConn) SetWriteDeadline(t time.Time) error {
 	return nil
 }
-
+	
 func TestHandlePacket(t *testing.T) {
 	names := []string{"www.google.com.", "www.amazon.com."}
 	for _, name := range names {
@@ -67,7 +67,7 @@ func TestHandlePacket(t *testing.T) {
 			t.Fatalf("Pack error: %s", err)
 		}
 
-		err = handlePacket(&MockPacketConn{}, &net.IPAddr{IP: net.ParseIP("127.0.0.1")}, buf)
+		err = handlePacket(&MockPacketConn{}, &net.IPAddr{IP: net.ParseIP("127.0.0.8053")}, buf)
 		if err != nil {
 			t.Fatalf("serve error: %s", err)
 		}

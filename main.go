@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mayankified/go-dns/pkg/dns"
+	dns "github.com/mayankified/go-dns/pkg"
 	"net"
 )
 
@@ -25,7 +25,7 @@ func main() {
                                      ░                          
 	`
 	fmt.Print(asciiArt)
-	fmt.Printf("Starting DNS Server...\n")
+	fmt.Printf("💡 Starting DNS Server...💣\n")
 	packetconn, err := net.ListenPacket("udp", Port)
 	if err != nil {
 		panic(err)

@@ -48,7 +48,13 @@ func handlePacket(pc net.PacketConn, addr net.Addr, buff []byte) error {
 }
 
 func dnsQuery(servers []net.IP, que dnsmessage.Question) (*dnsmessage.Message, error) {
+
+	fmt.Println("⏩ Resolving :", que.Name.String())
+
 	for i := 0; i < 3; i++ {
+
+		fmt.Println("\n🔍 Sending a DNS query to server level ", i+1)
+		fmt.Println("📡 Servers: ", servers)
 
 		dnsres, header, err := outgoingDnsQuery(servers, que)
 		if err != nil {
@@ -59,7 +65,10 @@ func dnsQuery(servers []net.IP, que dnsmessage.Question) (*dnsmessage.Message, e
 			return nil, err
 		}
 		if header.Authoritative {
-			fmt.Println("\n Authoritative response!: ", parsedres)
+			// fmt.Println("\n Authoritative response!: ", parsedres)
+			// parsedres[0].Body.(*dnsmessage.AResource).A[:]
+			fmt.Println("\n🎉 Authoritative response! : ", net.IP(parsedres[0].Body.(*dnsmessage.AResource).A[:]))
+			// this is the IP address of the domain
 			return &dnsmessage.Message{
 				Header: dnsmessage.Header{
 					Response: true,
@@ -115,9 +124,6 @@ func dnsQuery(servers []net.IP, que dnsmessage.Question) (*dnsmessage.Message, e
 }
 
 func outgoingDnsQuery(servers []net.IP, question dnsmessage.Question) (*dnsmessage.Parser, *dnsmessage.Header, error) {
-
-	fmt.Println("\n Sending a query to server!")
-	fmt.Println("\n Servers: ", servers)
 
 	max := ^uint16(0)
 	//iska matlab pehle hum 16 bit ka zero number bana rhe fir usko "^" isse not karke 1111111 ke format me laa rhe usse humko max no. milega

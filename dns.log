@@ -1,0 +1,16 @@
+INFO: 2024/06/01 14:37:28 main.go:73: Starting DNS Server
+INFO: 2024/06/01 14:37:43 main.go:135: Recieved query for quora.com. from 127.0.0.1:44064 with ID 3375 and type TypeA
+INFO: 2024/06/01 14:37:43 main.go:176: Resolving quora.com.
+INFO: 2024/06/01 14:37:43 main.go:198: Sending a DNS query to Root Server
+INFO: 2024/06/01 14:37:43 main.go:200: Servers [198.41.0.4 199.9.14.201 192.33.4.12 199.7.91.13 192.203.230.10 192.5.5.241 192.112.36.4 198.97.190.53]
+INFO: 2024/06/01 14:37:43 main.go:198: Sending a DNS query to TLD Server
+INFO: 2024/06/01 14:37:43 main.go:200: Servers [192.41.162.30 192.48.79.30 192.54.112.30 192.31.80.30 192.33.14.30 192.35.51.30]
+INFO: 2024/06/01 14:37:44 main.go:198: Sending a DNS query to Authoritative Server
+INFO: 2024/06/01 14:37:44 main.go:200: Servers [205.251.193.88]
+INFO: 2024/06/01 14:37:44 main.go:220: Authoritative response quora.com. ➡ 52.207.83.64
+INFO: 2024/06/01 14:37:44 main.go:167: Successfully responded for quora.com. to 127.0.0.1:44064
+INFO: 2024/06/01 14:37:54 main.go:135: Recieved query for quora.com. from 127.0.0.1:50533 with ID 15130 and type TypeA
+
+INFO: 2024/06/01 14:37:54 main.go:176: Resolving quora.com.
+INFO: 2024/06/01 14:37:54 main.go:188: Cache hit quora.com.
+INFO: 2024/06/01 14:37:54 main.go:167: Successfully responded for quora.com. to 127.0.0.1:50533

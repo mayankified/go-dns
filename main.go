@@ -13,7 +13,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-	
 )
 
 const (
@@ -23,13 +22,13 @@ const (
 	CacheDuration = 300 * time.Second // 5 minutes
 )
 
-// cache is a map of domain names to cached DNS responses
+// cache is a map of domains jo cache honge
 var cache = struct {
 	sync.RWMutex
 	m map[string]cachedResponse
 }{m: make(map[string]cachedResponse)}
 
-// cachedResponse is a DNS response that has been cached
+// cachedResponse is a struct jo cache hoga
 type cachedResponse struct {
 	response *dnsmessage.Message
 	expiry   time.Time
@@ -68,7 +67,6 @@ func main() {
 	`
 	fmt.Println(asciiArt)
 	fmt.Println("💡 Starting DNS Server!...💣                    🚬 Developed by: 𝗺  𝗮 𝘆 𝗮 𝗻 𝗸")
-	// fmt.Println("\n 🚬 Developed by: MAYANK")
 	fmt.Println("\n🔗 Listening on port", Port)
 	infolog.Println("Starting DNS Server")
 
@@ -85,7 +83,7 @@ func main() {
 	// Handle incoming packets
 	for {
 		buff := make([]byte, MaxPacketSize)
-		// ReadFrom reads a packet from the connection
+		// Incoming packets read kar rhe
 		bytenum, addr, err := packetconn.ReadFrom(buff)
 		if err != nil {
 			fmt.Printf("Read Error from %s : %s \n", addr.String(), err)
@@ -140,11 +138,11 @@ func processPacket(pc net.PacketConn, addr net.Addr, buff []byte) error {
 		return err
 	}
 
-	// Set the ID of the response to the ID of the request
+	// Setting the ID of the response to the ID of the request
 	res.Header.ID = header.ID
 
 	cache.Lock()
-	// Add the response to the cache
+	// Response ko cache me add kar rhe
 	cache.m[que.Name.String()] = cachedResponse{
 		response: res,
 		expiry:   time.Now().Add(CacheDuration),
@@ -158,7 +156,7 @@ func processPacket(pc net.PacketConn, addr net.Addr, buff []byte) error {
 		return err
 	}
 
-	// WriteTo writes the response to the connection
+	// writing the response to the connection
 	_, err = pc.WriteTo(resBuff, addr)
 	if err != nil {
 		errorlog.Println("Error in writing response", err)
